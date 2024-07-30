@@ -20,13 +20,10 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const {email, password} = req.body;
-    console.log("plain password is", password)
     try {
         const user = await User.findOne({email});
-        console.log("user from db is", user)
         if (!user) return res.status(404).json({message: "User not found!"});
         const doesPasswordMatch = await bcrypt.compare(user.password, password);
-        console.log("doesPassword match", doesPasswordMatch)
         res.cookie("token", generateToken({email: user.email, id: user.id}), {httpOnly: true, maxAge: 7*24*60*60*1000})
         res.status(200).json({jwt: generateToken({email: user.email, id: user.id, username:user.username, usertype:user.usertype,})}) 
 

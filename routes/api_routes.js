@@ -1,12 +1,13 @@
 
 const express = require('express')
 const { createUser, loginUser } = require('../controller/user_controller')
+const { isLoggedIn } = require('../middlewares/auth_middleware')
 
 const apiRouter = express.Router()
 
 
 
-apiRouter.get("/ping", (req, res) => {
+apiRouter.get("/ping", [isLoggedIn], (req, res) => {
     res.send({messsage: "ping received"})
 })
 
