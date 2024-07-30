@@ -1,6 +1,6 @@
 
 const express = require('express')
-const { createUser } = require('../controller/user_controller')
+const { createUser, loginUser } = require('../controller/user_controller')
 
 const apiRouter = express.Router()
 
@@ -12,6 +12,7 @@ apiRouter.get("/ping", (req, res) => {
 
 
 apiRouter.post("/user/signup", createUser)
+apiRouter.post("/user/signin", loginUser)
 
 
 module.exports = apiRouter;

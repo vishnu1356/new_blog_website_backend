@@ -1,6 +1,8 @@
 const express = require('express');
 const { PORT } = require('./config/server_config');
 const apiRouter = require('./routes/api_routes');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const { default: mongoose } = require('mongoose');
 const app = express();
 
@@ -10,6 +12,8 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/blog_backend')
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log(err));
+app.use(cookieParser())
+app.use(cors())
 app.use(express.json());
 app.use(express.text())
 app.use(express.urlencoded({ extended: true }))
