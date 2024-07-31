@@ -83,3 +83,17 @@ exports.getPostByCategory = async (req, res) => {
 }
 
 
+exports.deletePostById = async (req, res) => {
+    const {id} = req.params;
+    if(!id) {
+        res.status(404).json({message: 'No post found for the specified id'})
+    }
+    try {
+        const resposne = await Post.findByIdAndDelete(id);
+        res.status(200).json({message:"post deleted successfully"});
+    } catch (error) {
+        console.error("error caught by deletePostById post", error)
+        res.status(404).json({message: "Something Went Wrong"})
+    }
+}
+
