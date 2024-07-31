@@ -60,3 +60,26 @@ exports.getSinglePost = async (req, res) => {
 }
 
 
+exports.getPostByCategory = async (req, res) => {
+
+    const {category} = req.query;
+    try {
+        if (!category) {
+            return res.status(400).json({ message: 'Category query parameter is required' });
+          }
+      
+          // Find posts with the specified category
+          const posts = await Post.find(req.query);
+          console.log("found posts", posts)
+      
+          if (posts.length === 0) {
+            return res.status(404).json({ message: 'No posts found for the specified category' });
+          }
+          res.status(200).json(posts);
+    } catch (error) {
+        console.error("error caught by Single post", error)
+        res.status(404).json({message: "Something Went Wrong"})
+    }
+}
+
+

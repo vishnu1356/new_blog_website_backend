@@ -4,7 +4,7 @@ const multer = require('multer')
 const path = require("path")
 const { createUser, loginUser } = require('../controller/user_controller')
 const { isLoggedIn } = require('../middlewares/auth_middleware')
-const { createPost, getAllPosts, getSinglePost } = require('../controller/post_controller')
+const { createPost, getAllPosts, getSinglePost, getPostByCategory } = require('../controller/post_controller')
 
 const apiRouter = express.Router()
 
@@ -34,6 +34,7 @@ apiRouter.post("/user/signup", createUser)
 apiRouter.post("/user/signin", loginUser)
 apiRouter.get("/posts", getAllPosts)
 apiRouter.get("/posts/:id", getSinglePost)
+apiRouter.get("/filter", getPostByCategory)
 apiRouter.post("/post/create", upload.single("img"), createPost)
 
 
