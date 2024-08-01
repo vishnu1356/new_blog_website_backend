@@ -59,6 +59,42 @@ exports.getSinglePost = async (req, res) => {
     }
 }
 
+exports.singlePostDetail = async (req, res) => {
+
+    const {id} = req.params;
+    try {
+        const response = await Post.findById(id);
+        console.log("response is", res)
+        if (response.length === 0) {
+            return res.status(404).json({ message: 'No posts found' });
+          }
+        //   const imagePath = path.join(__dirname, "../public", response.img);
+        //   res.sendFile(imagePath)
+        res.status(200).json(response);
+    } catch (error) {
+        console.error("error caught by Single post", error)
+        res.status(404).json({message: "Something Went Wrong"})
+
+    }
+}
+
+// exports.getSinglePostForImage = async (req, res) => {
+
+//     const {id} = req.params;
+//     try {
+//         const response = await Post.findById(id);
+//         console.log("response is", res)
+//         if (response.length === 0) {
+//             return res.status(404).json({ message: 'No posts found' });
+//           }
+//           const imagePath = path.join(__dirname, "../public", response.img);
+//           res.sendFile(imagePath)
+//     } catch (error) {
+//         console.error("error caught by Single post", error)
+//         res.status(404).json({message: "Something Went Wrong"})
+
+//     }
+// }
 
 exports.getPostByCategory = async (req, res) => {
 
