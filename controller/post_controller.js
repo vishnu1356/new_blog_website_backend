@@ -1,4 +1,5 @@
 const Post = require("../models/post_model");
+const path = require("path")
 
 
 
@@ -49,9 +50,8 @@ exports.getSinglePost = async (req, res) => {
         if (response.length === 0) {
             return res.status(404).json({ message: 'No posts found' });
           }
-      
-          // Send the posts as the response
-          res.status(200).json(response);
+          const imagePath = path.join(__dirname, "../public", response.img);
+          res.sendFile(imagePath)
     } catch (error) {
         console.error("error caught by Single post", error)
         res.status(404).json({message: "Something Went Wrong"})

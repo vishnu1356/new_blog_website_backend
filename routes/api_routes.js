@@ -12,12 +12,11 @@ const apiRouter = express.Router()
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const uploadDir = path.resolve(__dirname, "../public");
-        return cb(null, uploadDir)
+         cb(null, uploadDir)
     },
     filename: function (req, file, cb) {
         console.log("coming file is: ", file)
-        
-        return cb(null, `${Date.now()}-${file.originalname}`)
+         cb(null, `${Date.now()}-${file.originalname}`)
     }
 })
 
