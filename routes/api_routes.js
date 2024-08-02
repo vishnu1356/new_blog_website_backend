@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage })
 
 
-apiRouter.get("/ping", [isLoggedIn], (req, res) => {
+apiRouter.get("/ping",  (req, res) => {
     res.send({messsage: "ping received"})
 })
 
